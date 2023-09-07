@@ -1,0 +1,166 @@
+
+
+.name, h1{
+    color : blue;
+    text-transform: capitalize; 
+}
+
+.moduleName{
+    font-family: monospace !important;
+    font-weight: 400 !important;
+    font-size: 1.5rem !important;
+}
+
+.logoName, .logoNameSidebar{
+    text-transform: capitalize !important;
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Edu SA Beginner', cursive !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    display: flex;
+    align-items: center !important;
+    
+}
+.logoDocDoc{
+     display: flex;
+    align-items: center !important;
+    cursor: pointer !important;
+}
+
+
+.logoNameSidebar{
+    display: flex !important;
+    justify-content: center !important;
+}
+
+
+.logoImage{
+    width : 40px;
+    height : 40px;
+    vertical-align: middle;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    line-height: 1;
+}
+
+.nav_nav_btn{
+    outline: none !important;
+    border:none !important
+}
+
+.nav_nav_btn:focus{
+    outline: none !important;
+    border : none !important;
+}
+
+
+.homePageWrapper{
+    width:100%;
+    background-image: url('../multimedia/homePage.jpg');
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(159, 198, 211, 0.397);
+    background-blend-mode: lighten;
+    margin-top: -1rem !important;
+    position: fixed;
+}
+
+.homePageContainer{
+    display: flex;
+}
+
+.avatar{
+    background-color: whitesmoke !important;
+    color: black !important;
+    font-weight: 600 !important;
+    font-family: 'Edu SA Beginner', cursive !important;
+}
+
+.avatar:hover{
+     background-color: rgb(71, 69, 69) !important;
+    color: whitesmoke !important;
+    font-weight: 600 !important;
+}
+
+
+.homePageHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    flex-wrap: wrap;
+    font-size: 8rem !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.homePageHeader > h3{
+    text-transform: capitalize;
+    font-weight: 300;
+    font-size: 2.2rem;
+    font-family: 'Dancing Script', cursive;
+}
+
+.userName{
+   
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 900 !important;
+    font-style: italic;
+    margin-bottom: 8px !important;
+    border-bottom: 2px solid turquoise;
+    color: midnightblue !important;
+}
+
+a{
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.arrowDownBtn{
+    margin-top: 3rem !important;
+    font-size: 50px !important;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width : 300px) {
+    .logoImage{
+         width : 30px;
+        height : 30px;
+    }
+    .logoName{
+    font-size: 1.5rem !important;
+}
+   
+}
+
+@media screen and (max-width : 270px) {
+    .logoImage{
+       /* display: none; */
+          width : 24px;
+        height : 24px;
+       margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    }
+    .logoName{
+    font-size: 1.5rem !important;
+    
+}
+   
+}
+
+@media screen and (max-width : 270px) {
+    .logoImage{
+       display: none;
+    }
+    .logoName{
+    font-size: 1.5rem !important;
+}
+   
+}

@@ -1,0 +1,160 @@
+.loginForm{
+    width: 100%;
+    height:100vh;
+    background-image: url('../multimedia/background.avif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(173, 216, 230, 0.219);
+    opacity: 1;
+    background-blend-mode: lighten;
+}
+
+.loginForm__wrapper{
+    height : 500px;
+    width : 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    margin-left: 10px;
+    margin-right : 10px;
+    align-items: center;
+}
+.loginHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    font-family: monospace;
+    text-align: middle;
+}
+
+
+.loginInput{
+    display: flex;
+    flex-direction: column;
+    width:350px;
+    height: 65%;
+    /* border: 1px solid black; */
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.textField{
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+     width: 100%;
+}
+
+.separator{
+    width: 100%;
+    height: 2%;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    border-bottom: 0.5px solid grey;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.navBtn{
+    width:350px;
+    height: 38%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.errorField{
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    background-color:  rgba(190, 42, 111, 0.623) !important;
+    color : white !important; 
+    width: 100%;
+    cursor: auto !important;
+    text-transform: capitalize !important;
+}
+.errorField:hover{
+     background-color:  rgba(190, 42, 111, 0.623) !important;
+    color : white !important; 
+}
+.successField{
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    background-color:   rgba(42, 190, 109, 0.863) !important;
+    color : white !important; 
+    width: 100%;
+    cursor: auto !important;
+    text-transform: capitalize !important;
+
+}
+
+.successField:hover{
+     background-color:  rgba(42, 190, 109, 0.863) !important;
+    color : white !important; 
+}
+
+
+
+.navBtn > .linkText{
+    color : #007bff !important;
+}
+
+.navBtn > .linkText:hover{
+    color : #007bff !important;
+    text-decoration: underline !important;
+}
+
+@media screen and (max-width: 370px) {
+    .loginForm__wrapper{
+    width : 290px;
+}
+
+.loginInput {
+    width:290px;
+}
+
+.navBtn{
+    width:290px;
+}
+
+}
+
+@media screen and (max-width: 300px){
+   .loginForm__wrapper{
+    width : 240px;
+}
+
+.loginInput {
+    width:240px;
+}
+.navBtn{
+    width:240px;
+}
+ 
+}
+
+@media screen and (max-width: 250px){
+    .loginForm{
+        position: absolute;
+        scroll-behavior: smooth;
+    }
+   .loginForm__wrapper{
+    width : 210px;
+}
+
+.loginInput {
+    width:210px;
+}
+
+.navBtn{
+    width:210px;
+}
+ 
+}

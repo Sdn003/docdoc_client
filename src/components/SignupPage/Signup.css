@@ -1,0 +1,8 @@
+.disabledBtn{
+    background-color: lightblue !important;
+    cursor: auto !important;
+    outline: none !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+     width: 100%;
+}

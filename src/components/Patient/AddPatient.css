@@ -1,0 +1,102 @@
+.addContainer{
+    width: 100%;
+    height : 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: top;
+    justify-content: center;
+    padding : 1rem !important;
+    background-color: whitesmoke;
+    margin-bottom: 3rem !important;
+}
+
+.addWrapper{
+   display: flex;
+   width : 100%;
+   height : auto;
+   flex-direction: row;
+   margin : 2rem !important; 
+    
+
+}
+
+.addFormContainer{
+    width: 70%;
+    height: auto;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+    background-color: whitesmoke;
+}
+
+.addImageContainer{
+    width: 30%;
+    height: auto;
+    background-image: url('../multimedia/Add/Addpat.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(117, 197, 224, 0.432);
+    opacity: 1;
+    background-blend-mode: lighten;
+    border-radius: 20px;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+}
+
+.addWrapper__h3 {
+    display:  none !important ;
+}
+
+@media screen and (max-width : 700px ) {
+    .addWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem!;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-left : 1rem !important;
+
+} 
+.addFormContainer{
+    width : 100%;
+}
+ .addImageContainer{
+   display: none;
+   width: 0px;
+}
+}
+
+@media screen and (max-width : 660px ){
+    .addContainer{
+        padding : 0rem !important;
+        /* align-items: center; */
+    justify-content: center;
+    }
+    .addWrapper__h3 {
+    display: block !important;
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-top : 0.5rem !important;
+    margin-bottom: 0.5rem !important;  
+}
+
+.moduleName{
+    display: none !important;
+}
+.addWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1rem;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-left : 1rem !important;
+
+} 
+.addFormContainer{
+    width : 100%;
+}
+}
+
+

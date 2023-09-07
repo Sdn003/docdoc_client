@@ -1,0 +1,36 @@
+.container {
+  padding-top: 0px;
+  width: 100%;
+  border-radius: 10px;
+}
+.ppDate {
+    width: 100%;
+  height: 50px;
+  font-size: 12px;
+  padding-left: 6px;
+  border-radius: 10px;
+}
+.ppDate::-webkit-inner-spin-button,
+.ppDate::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+.ppDate:focus::-webkit-calendar-picker-indicator, .ppDate:hover::-webkit-calendar-picker-indicator {
+  display: block;
+  -webkit-appearance: menulist;
+}
+.ppDate::-webkit-clear-button {
+  display: none;
+  -webkit-appearance: none;
+}
+.constrained {
+  max-width: 160px;
+}
+
+.form-control{
+    border-radius: 10px;
+}
+
+.emailEditAppointment{
+  text-transform: lowercase !important;
+}
