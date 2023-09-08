@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./UpdatePassword.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LockResetIcon from "@mui/icons-material/LockReset";
-import { Button, TextField } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
 import env from "react-dotenv";
@@ -11,6 +11,7 @@ import env from "react-dotenv";
 function UpdatePassword() {
 
   const navigate = useNavigate();
+  const [loader, setLoader] = useState();
 
   useEffect(() => {
     if (!localStorage.getItem("authId")) {
@@ -30,10 +31,12 @@ function UpdatePassword() {
 
   const onSubmit = async (formData, {resetForm}) => {
     try {
+    setLoader(true);
       await axios
         .post(env.API_URL + "UpdatePassword", formData)
         .then((res) => {
           if (res.data.successUpdate === true) {
+          setLoader(false);
             Swal.fire({
               icon: "success",
               title: "Password Updated Successfully",
@@ -41,17 +44,21 @@ function UpdatePassword() {
             resetForm();
             navigate('/Home')
           } else {
+          setLoader(false);
             Swal.fire({
               icon: "info",
               title: "Please Check your credentials",
             });
           }
         })
-        .catch((err) =>
+        .catch((err) =>{
+        setLoader(false);
           Swal.fire({
             icon: "error",
             title: "Internal Server Error",
-          })
+          });
+        }
+          
         );
     } catch (error) {
         Swal.fire({
@@ -122,110 +129,120 @@ function UpdatePassword() {
 
   return (
     <>
-      <div className="loginForm">
-        <div className="loginForm__wrapper">
-          <div className="loginHeader">
-            <LockResetIcon />
-            <h3>Update Password</h3>
+      {loader ? (
+        <>
+          <div className="loader">
+            <CircularProgress color="secondary" />
           </div>
-
-          {/* Email  */}
-          <div className="loginInput">
-            <TextField
-              required
-              value={formik.values.email}
-              name="email"
-              id="outlined-required"
-              label="E-Mail"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.email ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.email}
+        </>
+      ) : (
+        <>
+          <div className="loginForm">
+            <div className="loginForm__wrapper">
+              <div className="loginHeader">
+                <LockResetIcon />
+                <h3>Update Password</h3>
               </div>
-            ) : null}
 
-            {/* Old Password  */}
-            <TextField
-              required
-              value={formik.values.oldPassword}
-              name="oldPassword"
-              id="outlined-required"
-              label="Old Password"
-              type="password"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.oldPassword ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.oldPassword}
-              </div>
-            ) : null}
-
-            {/* New Password  */}
-            <TextField
-              id="outlined-password-input"
-              required
-              label="New Password"
-              type="password"
-              name="newPassword"
-              value={formik.values.newPassword}
-              autoComplete="current-password"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.newPassword ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.newPassword}
-              </div>
-            ) : null}
-
-            {/* confirm password  */}
-            <TextField
-              id="outlined-password-input"
-              required
-              label="Confirm Password"
-              type="password"
-              name="confirmPassword"
-              value={formik.values.confirmPassword}
-              autoComplete="current-password"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.confirmPassword ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.confirmPassword}
-              </div>
-            ) : null}
-            {formik.errors.confirmPassword ||
-            formik.errors.oldPassword ||
-            formik.errors.newPassword ||
-            formik.errors.email ? (
-              <>
-                <Button variant="contained" className="disabledBtn">
-                  Submit
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant="contained"
+              {/* Email  */}
+              <div className="loginInput">
+                <TextField
+                  required
+                  value={formik.values.email}
+                  name="email"
+                  id="outlined-required"
+                  label="E-Mail"
                   className="textField"
-                  onClick={formik.handleSubmit}
-                >
-                  Submit
-                </Button>
-              </>
-            )}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.email ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.email}
+                  </div>
+                ) : null}
+
+                {/* Old Password  */}
+                <TextField
+                  required
+                  value={formik.values.oldPassword}
+                  name="oldPassword"
+                  id="outlined-required"
+                  label="Old Password"
+                  type="password"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.oldPassword ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.oldPassword}
+                  </div>
+                ) : null}
+
+                {/* New Password  */}
+                <TextField
+                  id="outlined-password-input"
+                  required
+                  label="New Password"
+                  type="password"
+                  name="newPassword"
+                  value={formik.values.newPassword}
+                  autoComplete="current-password"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.newPassword ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.newPassword}
+                  </div>
+                ) : null}
+
+                {/* confirm password  */}
+                <TextField
+                  id="outlined-password-input"
+                  required
+                  label="Confirm Password"
+                  type="password"
+                  name="confirmPassword"
+                  value={formik.values.confirmPassword}
+                  autoComplete="current-password"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.confirmPassword ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.confirmPassword}
+                  </div>
+                ) : null}
+                {formik.errors.confirmPassword ||
+                formik.errors.oldPassword ||
+                formik.errors.newPassword ||
+                formik.errors.email ? (
+                  <>
+                    <Button variant="contained" className="disabledBtn">
+                      Submit
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="contained"
+                      className="textField"
+                      onClick={formik.handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </>
+                )}
+              </div>
+              <div className="navBtn"></div>
+            </div>
           </div>
-          <div className="navBtn"></div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 }

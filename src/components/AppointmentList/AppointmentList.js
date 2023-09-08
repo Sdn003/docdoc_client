@@ -17,10 +17,6 @@ function AppointmentList() {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    setLoader(true);
-    setTimeout(() => {
-      setLoader(false);
-    }, 500);
     getData();
     let userdata = localStorage.getItem("userdata");
     userdata = JSON.parse(userdata);
@@ -35,12 +31,20 @@ function AppointmentList() {
   //Getting Appointment in the list
   const getData = async () => {
     try {
+      setLoader(true);
       await axios.get(env.API_URL + "Appointment").then(async (res) => {
         if (res.data.successFetch === true) {
           let appointmentData = await res.data.appointmentData;
           setData(appointmentData);
+          setLoader(false);
         }
-      });
+      }).catch((err) => {
+        setLoader(false);
+        Swal.fire({
+          icon:"error",
+          title:"Error Occurred"
+        })
+      })
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -73,16 +77,19 @@ function AppointmentList() {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
+             setLoader(true);
             await axios
               .delete(env.API_URL + "DeleteAppointment/" + id)
               .then((res) => {
                 if (res.data.successDelete === true) {
+                  setLoader(false);
                   swalWithBootstrapButtons.fire({
                     icon: "success",
                     title: res.data.message,
                   });
                   getData();
                 } else {
+                  setLoader(false);
                   Swal.fire({
                     icon: "info",
                     title: res.data.message,
@@ -90,7 +97,7 @@ function AppointmentList() {
                 }
               });
           } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire("Cancelled", "error");
+            swalWithBootstrapButtons.fire("Cancelled");
           }
         });
     } catch (error) {
@@ -98,9 +105,6 @@ function AppointmentList() {
         icon: "error",
         title: "Internal Server Error",
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
     }
   };
 
@@ -196,6 +200,11 @@ function AppointmentList() {
 
   return (
     <>
+      <Header altLetter={name[0]} moduleName=" | Appointment List" />
+      <Box component="main" sx={{ p: 0.5 }}>
+        <Toolbar />
+      </Box>
+
       {loader ? (
         <>
           <div className="loader">
@@ -204,10 +213,7 @@ function AppointmentList() {
         </>
       ) : (
         <>
-          <Header altLetter={name[0]} moduleName=" | Appointment List" />
-          <Box component="main" sx={{ p: 0.5 }}>
-            <Toolbar />
-          </Box>
+        
           <div className="tableContainer">
             <h3 className="addWrapper__h3">Appointment List</h3>
             <Box sx={{ height: "100%", width: "100%" }}>

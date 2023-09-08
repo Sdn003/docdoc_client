@@ -21,10 +21,6 @@ function PatientList() {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    setLoader(true);
-    setTimeout(() => {
-      setLoader(false);
-    }, 100)
      getData();
     let userdata = localStorage.getItem("userdata");
     userdata = JSON.parse(userdata);
@@ -39,10 +35,12 @@ function PatientList() {
   //Getting patients in the list
   const getData = async() => {
     try {
+      setLoader(true)
         await axios.get(env.API_URL + 'AllPatients').then(async(res) => {
           if(res.data.patientDataFetched === true){
             let patientData = await res.data.patientData;
             setData(patientData);
+            setLoader(false);
             
           }
     })
@@ -53,7 +51,6 @@ function PatientList() {
         title: "OOPS! Internal Server Error",
         text : "Reloading the Web Page"
       });
-      window.location.reload();
     }
   
   }
@@ -80,10 +77,12 @@ function PatientList() {
   reverseButtons: true
   }).then(async(result) => {
   if (result.isConfirmed) {
+    setLoader(true);
    await axios
           .delete(env.API_URL + "DeletePatient/" + id)
           .then((res) => {
             if(res.data.patientDeleteSuccess === true){
+              setLoader(false);
              swalWithBootstrapButtons.fire({
 			icon : 'success',
 			title : res.data.message
@@ -91,6 +90,7 @@ function PatientList() {
               getData();
             }
             else{
+              setLoader(false);
               Swal.fire({
                 icon: "info",
                 title: res.data.message,
@@ -101,7 +101,6 @@ function PatientList() {
   } else if (result.dismiss === Swal.DismissReason.cancel ) {
     swalWithBootstrapButtons.fire(
       'Cancelled',
-      'error'
     )
   }
 })
@@ -218,22 +217,21 @@ function PatientList() {
 
   return (
     <>
-     {loader ? (
-            <>
-              <div className="loader">
-                <CircularProgress color="secondary" />
-              </div>
-            </>
-          ) : (
-          <> 
-          <Header altLetter={name[0]} moduleName=" | Patients List" />
+      <Header altLetter={name[0]} moduleName=" | Patients List" />
       <Box component="main" sx={{ p: 0.5 }}>
         <Toolbar />
       </Box>
-      <div className="tableContainer">
-        <h3 className="addWrapper__h3">Patient List</h3>
-        <Box sx={{ height: "100%", width: "100%" }}>
-           
+      {loader ? (
+        <>
+          <div className="loader">
+            <CircularProgress color="secondary" />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="tableContainer">
+            <h3 className="addWrapper__h3">Patient List</h3>
+            <Box sx={{ height: "100%", width: "100%" }}>
               <DataGrid
                 className="dataGrid"
                 rows={data}
@@ -250,11 +248,11 @@ function PatientList() {
                 pageSizeOptions={[5, 10, 50]}
                 disableColumnMenu
               />
-        </Box>
-      </div> 
-      </>)}
-    
-    </> 
+            </Box>
+          </div>
+        </>
+      )}
+    </>
   );
 }
 

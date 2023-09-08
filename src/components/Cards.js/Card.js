@@ -96,6 +96,9 @@ function Card() {
           );
         })}
       </div>
+      <br />
+      <br />
+      <br />
     </>
   );
     

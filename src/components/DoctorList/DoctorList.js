@@ -17,10 +17,6 @@ function DoctorList() {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    setLoader(true);
-    setTimeout(() => {
-      setLoader(false);
-    }, 100);
     getData();
     let userdata = localStorage.getItem("userdata");
     userdata = JSON.parse(userdata);
@@ -35,12 +31,14 @@ function DoctorList() {
   //Getting Doctors in the list
   const getData = async () => {
     try {
+      setLoader(true);
       await axios.get(env.API_URL + "AllDoctors").then(async (res) => {
         if (res.data.doctorDataFetched === true) {
           let doctorData = await res.data.doctorData;
           setData(doctorData);
+          setLoader(false);
         }
-      });
+      })
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -50,7 +48,7 @@ function DoctorList() {
     }
   };
 
-  //Deleting a Doctot
+  //Deleting a Doctor
   const deleteHandler = async (id) => {
     try {
       const swalWithBootstrapButtons = Swal.mixin({
@@ -72,17 +70,21 @@ function DoctorList() {
           reverseButtons: true,
         })
         .then(async (result) => {
+          
           if (result.isConfirmed) {
+            setLoader(true);
             await axios
               .delete(env.API_URL + "DeleteDoctor/" + id)
               .then((res) => {
                 if (res.data.doctorDeleteSuccess === true) {
+                  setLoader(false);
                   swalWithBootstrapButtons.fire({
                     icon: "success",
                     title: res.data.message,
                   });
                   getData();
                 } else {
+                  setLoader(false);
                   Swal.fire({
                     icon: "info",
                     title: res.data.message,
@@ -90,7 +92,7 @@ function DoctorList() {
                 }
               });
           } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire("Cancelled", "error");
+            swalWithBootstrapButtons.fire("Cancelled");
           }
         });
     } catch (error) {
@@ -200,6 +202,10 @@ function DoctorList() {
 
   return (
     <>
+      <Header altLetter={name[0]} moduleName=" | Doctors List" />
+      <Box component="main" sx={{ p: 0.5 }}>
+        <Toolbar />
+      </Box>
       {loader ? (
         <>
           <div className="loader">
@@ -208,10 +214,6 @@ function DoctorList() {
         </>
       ) : (
         <>
-          <Header altLetter={name[0]} moduleName=" | Doctors List" />
-          <Box component="main" sx={{ p: 0.5 }}>
-            <Toolbar />
-          </Box>
           <div className="tableContainer">
             <h3 className="addWrapper__h3">Doctor List</h3>
             <Box sx={{ height: "100%", width: "100%" }}>

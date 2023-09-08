@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
 import Login from './components/LoginPage/Login';
 import Homepage from './components/HomePage/Homepage';
 import Signup from './components/SignupPage/Signup';
@@ -22,18 +22,38 @@ import EditAppointment from './components/Appointment/EditAppointment';
 import AdminList from './components/Admin/AdminList';
 import EditAdmin from './components/Admin/EditAdmin';
 import Profile from './components/HomePage/Profile';
+import { useEffect, useState } from 'react';
 
 
 function App() {
  
+  // const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+   useEffect(() => {
+     if (localStorage.getItem("authId")){
+      setLoggedIn(true);
+     }
+   }, []);
+
+
 
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginSignUpPage />} />
-          <Route path="/Login" element={<Login />} />
+          {loggedIn ? (
+            <>
+              <Route path="/" element={<Homepage />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<LoginSignUpPage />} />
+            </>
+          )}
           <Route path="/Home" element={<Homepage />} />
+          <Route path="/LoginSignUpPage" element={<LoginSignUpPage />} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/Cards" element={<Card />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/ForgetPassword" element={<Forgetpassword />} />
@@ -78,7 +98,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-
           <Route
             path="/ScheduleAppointment"
             element={
@@ -87,7 +106,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-
           <Route
             path="/AddAdmin"
             element={
@@ -104,7 +122,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-
           <Route
             path="/EditDoctor/:id"
             element={
@@ -113,7 +130,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-
           <Route
             path="/AppointmentList"
             element={
@@ -130,7 +146,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-
           <Route
             path="/AdminList"
             element={
@@ -139,7 +154,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-
           <Route
             path="/EditAdmin/:id"
             element={

@@ -7,6 +7,7 @@ import env from "react-dotenv";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -21,6 +22,7 @@ import Swal from "sweetalert2";
 function EditDoctor() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [loader, setLoader] = useState();
   const params = useParams();
    const location = useLocation();
    const {
@@ -64,8 +66,10 @@ function EditDoctor() {
   //Getting Speciality Data
   const getData = async () => {
     try {
+      setLoader(true)
       await axios.get(env.API_URL + "Speciality").then((res) => {
         setSpecialityType(res.data.doc);
+        setLoader(false);
       });
     } catch (error) {
       Swal.fire({
@@ -78,11 +82,13 @@ function EditDoctor() {
 
   //Submitting the form
   const onSubmit = async (formData, { resetForm }) => {
+    setLoader(true)
       try {
         await axios
           .put(env.API_URL + "EditDoctor/" + params.id, formData)
           .then(async (res) => {
             if (res.data.doctorEditSuccess === true) {
+              setLoader(false);
               Swal.fire({
                 icon: "success",
                 title: res.data.message,
@@ -90,6 +96,7 @@ function EditDoctor() {
               navigate("/DoctorList");
               resetForm();
             } else {
+              setLoader(false);
               Swal.fire({
                 icon: "info",
                 title: res.data.message,
@@ -98,6 +105,7 @@ function EditDoctor() {
             }
           });
       } catch (error) {
+        setLoader(false);
         Swal.fire({
           icon: "error",
           title: "Internal Server Error",
@@ -205,210 +213,220 @@ function EditDoctor() {
       <Box component="main" sx={{ p: 0.5 }}>
         <Toolbar />
       </Box>
-      <div className="addContainer">
-        <div className="addWrapper">
-          <h3 className="addWrapper__h3">Edit Doctor</h3>
-          <div className="addFormContainer">
-            {/* Firstname  */}
-            <TextField
-              required
-              name="firstName"
-              value={formik.values.firstName}
-              id="outlined-required"
-              label="Firstname"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.firstName ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.firstName}
-              </div>
-            ) : null}
-            {/* Lastname  */}
-            <TextField
-              required
-              name="lastName"
-              value={formik.values.lastName}
-              id="outlined-required"
-              label="Lastname"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.lastName ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.lastName}
-              </div>
-            ) : null}
-            {/* Email  */}
-            <TextField
-              required
-              name="email"
-              value={formik.values.email}
-              id="outlined-required"
-              label="E-Mail"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.email ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.email}
-              </div>
-            ) : null}
-            {/* Age */}
-            <TextField
-              required
-              name="age"
-              value={formik.values.age}
-              id="outlined-required"
-              label="Age"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.age ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.age}
-              </div>
-            ) : null}
-            {/* Mobile  */}
-            <TextField
-              required
-              name="mobile"
-              value={formik.values.mobile}
-              id="outlined-required"
-              label="Mobile"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.mobile ? (
-              <div style={{ color: "crimson" }}>{formik.errors.mobile}</div>
-            ) : null}
-            {/* Reg No */}
-            <TextField
-              required
-              name="regNo"
-              value={formik.values.regNo}
-              id="outlined-required"
-              label="Registration Number"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.regNo ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.regNo}
-              </div>
-            ) : null}
-
-            {/* Year of Experience  */}
-            <TextField
-              required
-              name="yearsOfExp"
-              value={formik.values.yearsOfExp}
-              id="outlined-required"
-              label="Experience in Years"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.yearsOfExp ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.yearsOfExp}
-              </div>
-            ) : null}
-
-            {/* Specialized In  */}
-            <FormControl className="textField">
-              <InputLabel id="demo-simple-select-helper-label" required>
-                Specialized In
-              </InputLabel>
-              <Select
-                className="specialityType"
-                name="specializedIn"
-                labelId="demo-simple-select-helper-label"
-                value={formik.values.specializedIn}
-                label="Specialized In"
-                onChange={formik.handleChange}
-              >
-                {specialityType.map((data, index) => {
-                  return (
-                    <MenuItem
-                      value={data.specialityType}
-                      key={index}
-                      className="specialityType"
-                    >
-                      {data.specialityType}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            {formik.errors.specializedIn ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.specializedIn}
-              </div>
-            ) : null}
-
-            {/* Consultation Fee */}
-            <TextField
-              required
-              name="consultationFee"
-              value={formik.values.consultationFee}
-              id="outlined-required"
-              label="Consultation Fee"
-              className="textField"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.consultationFee ? (
-              <div style={{ color: "crimson" }} className="validatorText">
-                {formik.errors.consultationFee}
-              </div>
-            ) : null}
-
-            {/* Disabling Submit Button  */}
-            {formik.errors.firstName ||
-            formik.errors.lastName ||
-            formik.errors.email ||
-            formik.errors.mobile ||
-            formik.errors.age ||
-            formik.errors.regNo ||
-            formik.errors.yearsOfExp ||
-            formik.errors.specializedIn ||
-            formik.errors.consultationFee ? (
-              <>
-                <Button variant="contained" className="disabledBtn">
-                  Submit
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant="contained"
-                  className="textField"
-                  onClick={formik.handleSubmit}
-                >
-                  Submit
-                </Button>
-              </>
-            )}
+      {loader ? (
+        <>
+          <div className="loader">
+            <CircularProgress color="secondary" />
           </div>
-          <div
-            className="addImageContainer"
-            style={{
-              backgroundImage: "url(" + image_url + ")",
-            }}
-          ></div>
-        </div>
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
+        </>
+      ) : (
+        <>
+          <div className="addContainer">
+            <div className="addWrapper">
+              <h3 className="addWrapper__h3">Edit Doctor</h3>
+              <div className="addFormContainer">
+                {/* Firstname  */}
+                <TextField
+                  required
+                  name="firstName"
+                  value={formik.values.firstName}
+                  id="outlined-required"
+                  label="Firstname"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.firstName ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.firstName}
+                  </div>
+                ) : null}
+                {/* Lastname  */}
+                <TextField
+                  required
+                  name="lastName"
+                  value={formik.values.lastName}
+                  id="outlined-required"
+                  label="Lastname"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.lastName ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.lastName}
+                  </div>
+                ) : null}
+                {/* Email  */}
+                <TextField
+                  required
+                  name="email"
+                  value={formik.values.email}
+                  id="outlined-required"
+                  label="E-Mail"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.email ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.email}
+                  </div>
+                ) : null}
+                {/* Age */}
+                <TextField
+                  required
+                  name="age"
+                  value={formik.values.age}
+                  id="outlined-required"
+                  label="Age"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.age ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.age}
+                  </div>
+                ) : null}
+                {/* Mobile  */}
+                <TextField
+                  required
+                  name="mobile"
+                  value={formik.values.mobile}
+                  id="outlined-required"
+                  label="Mobile"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.mobile ? (
+                  <div style={{ color: "crimson" }}>{formik.errors.mobile}</div>
+                ) : null}
+                {/* Reg No */}
+                <TextField
+                  required
+                  name="regNo"
+                  value={formik.values.regNo}
+                  id="outlined-required"
+                  label="Registration Number"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.regNo ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.regNo}
+                  </div>
+                ) : null}
+
+                {/* Year of Experience  */}
+                <TextField
+                  required
+                  name="yearsOfExp"
+                  value={formik.values.yearsOfExp}
+                  id="outlined-required"
+                  label="Experience in Years"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.yearsOfExp ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.yearsOfExp}
+                  </div>
+                ) : null}
+
+                {/* Specialized In  */}
+                <FormControl className="textField">
+                  <InputLabel id="demo-simple-select-helper-label" required>
+                    Specialized In
+                  </InputLabel>
+                  <Select
+                    className="specialityType"
+                    name="specializedIn"
+                    labelId="demo-simple-select-helper-label"
+                    value={formik.values.specializedIn}
+                    label="Specialized In"
+                    onChange={formik.handleChange}
+                  >
+                    {specialityType.map((data, index) => {
+                      return (
+                        <MenuItem
+                          value={data.specialityType}
+                          key={index}
+                          className="specialityType"
+                        >
+                          {data.specialityType}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+                {formik.errors.specializedIn ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.specializedIn}
+                  </div>
+                ) : null}
+
+                {/* Consultation Fee */}
+                <TextField
+                  required
+                  name="consultationFee"
+                  value={formik.values.consultationFee}
+                  id="outlined-required"
+                  label="Consultation Fee"
+                  className="textField"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.consultationFee ? (
+                  <div style={{ color: "crimson" }} className="validatorText">
+                    {formik.errors.consultationFee}
+                  </div>
+                ) : null}
+
+                {/* Disabling Submit Button  */}
+                {formik.errors.firstName ||
+                formik.errors.lastName ||
+                formik.errors.email ||
+                formik.errors.mobile ||
+                formik.errors.age ||
+                formik.errors.regNo ||
+                formik.errors.yearsOfExp ||
+                formik.errors.specializedIn ||
+                formik.errors.consultationFee ? (
+                  <>
+                    <Button variant="contained" className="disabledBtn">
+                      Submit
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="contained"
+                      className="textField"
+                      onClick={formik.handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </>
+                )}
+              </div>
+              <div
+                className="addImageContainer"
+                style={{
+                  backgroundImage: "url(" + image_url + ")",
+                }}
+              ></div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+        </>
+      )}
     </>
   );
 }

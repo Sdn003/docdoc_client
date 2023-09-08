@@ -47,6 +47,7 @@ function Profile() {
               variant="contained"
               className="textField"
               startIcon={<LockResetIcon />}
+              style={{ width: "70%" }}
               onClick={() => {
                 navigate("/UpdatePassword");
               }}

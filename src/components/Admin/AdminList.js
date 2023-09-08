@@ -17,10 +17,6 @@ function AdminList() {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    setLoader(true);
-    setTimeout(() => {
-      setLoader(false);
-    }, 500);
     getData();
     let userdata = localStorage.getItem("userdata");
     userdata = JSON.parse(userdata);
@@ -35,14 +31,15 @@ function AdminList() {
   //Getting Admin in the list
   const getData = async () => {
     try {
+      setLoader(true);
       await axios.get(env.API_URL + "AllAdmins").then(async (res) => {
         if (res.data.successFetch === true) {
           let adminData = await res.data.adminData;
           setData(adminData);
+          setLoader(false);
         }
       });
     } catch (error) {
-      
       Swal.fire({
         icon: "error",
         title: "OOPS! Internal Server Error",
@@ -54,6 +51,7 @@ function AdminList() {
   //Deleting a Admin
   const deleteHandler = async (id) => {
     try {
+       
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: "btn btn-success",
@@ -74,16 +72,19 @@ function AdminList() {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
+            setLoader(true);
             await axios
               .delete(env.API_URL + "DeleteAdmin/" + id)
               .then((res) => {
                 if (res.data.successDelete === true) {
+                  setLoader(false);
                   swalWithBootstrapButtons.fire({
                     icon: "success",
                     title: res.data.message,
                   });
                   getData();
                 } else {
+                  setLoader(false);
                   Swal.fire({
                     icon: "info",
                     title: res.data.message,
@@ -91,7 +92,7 @@ function AdminList() {
                 }
               });
           } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire("Cancelled", "error");
+            swalWithBootstrapButtons.fire("Cancelled");
           }
         });
     } catch (error) {
@@ -165,6 +166,10 @@ function AdminList() {
 
   return (
     <>
+      <Header altLetter={name[0]} moduleName=" | Admin List" />
+      <Box component="main" sx={{ p: 0.5 }}>
+        <Toolbar />
+      </Box>
       {loader ? (
         <>
           <div className="loader">
@@ -173,11 +178,7 @@ function AdminList() {
         </>
       ) : (
         <>
-          <Header altLetter={name[0]} moduleName=" | Admin List" />
-          <Box component="main" sx={{ p: 0.5 }}>
-            <Toolbar />
-          </Box>
-          <div className="tableContainer">
+        <div className="tableContainer">
             <h3 className="addWrapper__h3">Admin List</h3>
             <Box sx={{ height: "100%", width: "100%" }}>
               <DataGrid
