@@ -23,6 +23,7 @@ import AdminList from './components/Admin/AdminList';
 import EditAdmin from './components/Admin/EditAdmin';
 import Profile from './components/HomePage/Profile';
 import { useEffect, useState } from 'react';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 
 function App() {
@@ -172,6 +173,11 @@ function App() {
           />
         </Routes>
       </Router>
+      <div className="signature">
+        Created with&nbsp;
+        <FavoriteIcon style={{ color: "crimson", fontSize: "medium" }} />
+        &nbsp;by&nbsp;<span className="sdn">Sudharsan S</span>
+      </div>
     </>
   );
 }

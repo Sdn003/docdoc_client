@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import axios from 'axios'
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
@@ -19,9 +19,6 @@ const initialValues = {
   password: "",
 };
 
-useEffect(() => {
-  
-},[])
 
 const validate = (values) => {
   let errors = {};
@@ -30,7 +27,8 @@ const validate = (values) => {
   if (!values.email) {
     errors.email = "Required, Demo email : demouser@email.com";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+    errors.email =
+      "Invalid email address, Demo email : demouser@email.com";
   }
 
   //Validating PassWord
@@ -42,7 +40,7 @@ const validate = (values) => {
      )
    ) {
      errors.password =
-       "Password must Contain atleast 1 uppercase, 1 lowercase, 1 number and 1 special character";
+       "Password must Contain atleast 1 alphabet, 1 number and 1 special character, Demo Password: 'Demo@123";
    }
 
    
@@ -67,25 +65,37 @@ const validate = (values) => {
             });
             navigate("/Home");
           } else if (res.data.successLogin === false) {
+            setLoader(false);
             Swal.fire({
               icon: "info",
               title: res.data.message,
             });
           }
           else if(res.data.userExist === false){
-            resetForm();
+            setLoader(false);
             Swal.fire({
               icon: "info",
               title: res.data.message,
               text: "Entered Email does not Exist"
             });
           }
-        })
-        .catch((err) => 
-         Swal.fire({
+          else{
+            setLoader(false);
+            Swal.fire({
               icon: "info",
-              title: "Error",
-            })
+              title: res.data.message,
+            });
+          }
+        })
+        .catch((err) => {
+          setLoader(false);
+           Swal.fire({
+             icon: "info",
+             title: "Error",
+             text:"Please Check your network connection"
+           });
+        }
+        
             )
 
     } catch (error) {
@@ -112,6 +122,8 @@ const formik = useFormik({
         <>
           <div className="loader">
             <CircularProgress color="secondary" />
+            <br/>
+            <p>&nbsp;&nbsp;Establishing a Secure Connection...</p>
           </div>
         </>
       ) : (
@@ -210,7 +222,8 @@ const formik = useFormik({
               </div>
             </div>
           </div>
-        </>)}
+        </>
+      )}
     </>
   );
 

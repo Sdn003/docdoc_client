@@ -50,14 +50,12 @@ function Homepage() {
             </h3>
             <DoubleArrowIcon
               className="arrowDownBtn"
-              onClick={() => navigate('/Cards')}
+              onClick={() => navigate("/Cards")}
             />
           </div>
         </div>
       </div>
-      <button onClick={logout} id="button">
-        Logout
-      </button>
+    
     </>
   );
 }

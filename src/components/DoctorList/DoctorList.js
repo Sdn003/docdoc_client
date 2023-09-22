@@ -73,6 +73,7 @@ function DoctorList() {
           
           if (result.isConfirmed) {
             setLoader(true);
+            console.log(id);
             await axios
               .delete(env.API_URL + "DeleteDoctor/" + id)
               .then((res) => {
@@ -184,7 +185,7 @@ function DoctorList() {
             </Tooltip>
 
             {/* Delete Button  */}
-            <Tooltip title="Edit" arrow>
+            <Tooltip title="Delete" arrow>
               <IconButton
                 className="iconBtn__list"
                 onClick={() => {

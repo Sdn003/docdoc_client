@@ -98,7 +98,7 @@ function AddAdmin() {
       )
     ) {
       errors.password =
-        "Password must Contain atleast 1 uppercase, 1 lowercase, 1 number and 1 special character";
+        "Password must Contain atleast 1 alphabet, 1 number and 1 special character";
 
     }
    
@@ -142,7 +142,7 @@ function AddAdmin() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.name ? (
+                {formik.touched.name && formik.errors.name ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.name}
                   </div>
@@ -159,7 +159,7 @@ function AddAdmin() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.email}
                   </div>
@@ -177,14 +177,14 @@ function AddAdmin() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.password ? (
+                {formik.touched.password && formik.errors.password ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.password}
                   </div>
                 ) : null}
 
                 {/* Image URL */}
-                <TextField
+                {/* <TextField
                   name="imageURL"
                   value={formik.values.imageURL}
                   id="outlined-required"
@@ -197,7 +197,7 @@ function AddAdmin() {
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.imageURL}
                   </div>
-                ) : null}
+                ) : null} */}
 
                 {/* Disabling Submit Button  */}
                 {formik.errors.name ||

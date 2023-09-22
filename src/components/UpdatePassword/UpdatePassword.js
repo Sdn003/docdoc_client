@@ -89,7 +89,7 @@ function UpdatePassword() {
       )
     ) {
       errors.oldPassword =
-        "Password must Contain atleast 1 uppercase, 1 lowercase, 1 number and 1 special character";
+        "Password must Contain atleast 1 alphabet, 1 number and 1 special character";
       
     }
 
@@ -102,7 +102,7 @@ function UpdatePassword() {
       )
     ) {
       errors.newPassword =
-        "Password must Contain atleast 1 uppercase, 1 lowercase, 1 number and 1 special character";
+        "Password must Contain atleast 1 alphabet, 1 number and 1 special character";
       
     }
 
@@ -115,7 +115,7 @@ function UpdatePassword() {
       )
     ) {
       errors.confirmPassword =
-        "Password must Contain atleast 1 uppercase, 1 lowercase, 1 number and 1 special character";
+        "Password must Contain atleast 1 alphabet, 1 number and 1 special character";
       
     }
 
@@ -156,7 +156,7 @@ function UpdatePassword() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.email}
                   </div>
@@ -174,7 +174,7 @@ function UpdatePassword() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.oldPassword ? (
+                {formik.touched.oldPassword && formik.errors.oldPassword ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.oldPassword}
                   </div>
@@ -193,7 +193,7 @@ function UpdatePassword() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.newPassword ? (
+                {formik.touched.newPassword && formik.errors.newPassword ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.newPassword}
                   </div>
@@ -212,7 +212,7 @@ function UpdatePassword() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.confirmPassword ? (
+                {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.confirmPassword}
                   </div>

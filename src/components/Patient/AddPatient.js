@@ -176,7 +176,7 @@ function AddPatient() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.firstName ? (
+                {formik.touched.firstName && formik.errors.firstName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.firstName}
                   </div>
@@ -193,7 +193,7 @@ function AddPatient() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.lastName ? (
+                {formik.touched.lastName && formik.errors.lastName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.lastName}
                   </div>
@@ -210,7 +210,7 @@ function AddPatient() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.email}
                   </div>
@@ -227,7 +227,7 @@ function AddPatient() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.age ? (
+                {formik.touched.age && formik.errors.age ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.age}
                   </div>
@@ -244,7 +244,7 @@ function AddPatient() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.mobile ? (
+                {formik.touched.mobile && formik.errors.mobile ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.mobile}
                   </div>
@@ -289,7 +289,7 @@ function AddPatient() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.ailments ? (
+                {formik.touched.ailments && formik.errors.ailments ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.ailments}
                   </div>
@@ -321,7 +321,8 @@ function AddPatient() {
               <div className="addImageContainer"></div>
             </div>
           </div>
-        </>)}
+        </>
+      )}
     </>
   );
 }

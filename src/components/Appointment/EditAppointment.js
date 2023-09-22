@@ -309,9 +309,9 @@ function EditAppointment() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.patientName ? (
+                {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: "crimson" }} className="validatorText">
-                    {formik.errors.patientName}
+                    {formik.errors.email}
                   </div>
                 ) : null}
 
@@ -341,7 +341,7 @@ function EditAppointment() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.patientName ? (
+                {formik.touched.patientName && formik.errors.patientName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.patientName}
                   </div>
@@ -373,7 +373,7 @@ function EditAppointment() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.mobile ? (
+                {formik.touched.mobile && formik.errors.mobile ? (
                   <div style={{ color: "crimson" }}>{formik.errors.mobile}</div>
                 ) : null}
 
@@ -403,7 +403,7 @@ function EditAppointment() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.specializedIn ? (
+                {formik.touched.specializedIn && formik.errors.specializedIn ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.specializedIn}
                   </div>
@@ -435,7 +435,7 @@ function EditAppointment() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.doctorName ? (
+                {formik.touched.doctorName && formik.errors.doctorName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.doctorName}
                   </div>
@@ -455,7 +455,7 @@ function EditAppointment() {
                     onChange={formik.handleChange}
                   />
                 </div>
-                {formik.errors.date ? (
+                {formik.touched.date && formik.errors.date ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.date}
                   </div>
@@ -475,7 +475,7 @@ function EditAppointment() {
                     onChange={formik.handleChange}
                   />
                 </div>
-                {formik.errors.time ? (
+                {formik.touched.time && formik.errors.time ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.time}
                   </div>

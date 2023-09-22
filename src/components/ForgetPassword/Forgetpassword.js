@@ -73,7 +73,7 @@ function Forgetpassword() {
           )
         ) {
           errors.newPassword =
-            "Password must Contain atleast 1 uppercase, 1 lowercase, 1 number and 1 special character";
+            "Password must Contain atleast 1 alphabet, 1 number and 1 special character";
 
         }
     return errors;
@@ -112,7 +112,7 @@ function Forgetpassword() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.email}
                   </div>
@@ -129,7 +129,7 @@ function Forgetpassword() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.newPassword ? (
+                {formik.touched.newPassword && formik.errors.newPassword ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.newPassword}
                   </div>

@@ -236,7 +236,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.firstName ? (
+                {formik.touched.firstName && formik.errors.firstName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.firstName}
                   </div>
@@ -252,7 +252,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.lastName ? (
+                {formik.touched.lastName && formik.errors.lastName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.lastName}
                   </div>
@@ -268,7 +268,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.email}
                   </div>
@@ -284,7 +284,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.age ? (
+                {formik.touched.age && formik.errors.age ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.age}
                   </div>
@@ -300,7 +300,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.mobile ? (
+                {formik.touched.mobile && formik.errors.mobile ? (
                   <div style={{ color: "crimson" }}>{formik.errors.mobile}</div>
                 ) : null}
                 {/* Reg No */}
@@ -314,7 +314,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.regNo ? (
+                { formik.touched.regNo && formik.errors.regNo ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.regNo}
                   </div>
@@ -331,7 +331,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.yearsOfExp ? (
+                {formik.touched.yearsOfExp && formik.errors.yearsOfExp ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.yearsOfExp}
                   </div>
@@ -363,7 +363,7 @@ function EditDoctor() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.specializedIn ? (
+                {formik.touched.specializedIn && formik.errors.specializedIn ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.specializedIn}
                   </div>
@@ -380,7 +380,7 @@ function EditDoctor() {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.consultationFee ? (
+                {formik.touched.consultationFee && formik.errors.consultationFee ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.consultationFee}
                   </div>

@@ -127,7 +127,7 @@ const { name,  email, password, imageURL } = location.state;
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-            {formik.errors.name ? (
+            {formik.touched.name && formik.errors.name ? (
               <div style={{ color: "crimson" }} className="validatorText">
                 {formik.errors.name}
               </div>
@@ -144,7 +144,7 @@ const { name,  email, password, imageURL } = location.state;
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-            {formik.errors.email ? (
+            {formik.touched.email && formik.errors.email ? (
               <div style={{ color: "crimson" }} className="validatorText">
                 {formik.errors.email}
               </div>
@@ -162,7 +162,7 @@ const { name,  email, password, imageURL } = location.state;
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-            {formik.errors.password ? (
+            {formik.touched.password && formik.errors.password ? (
               <div style={{ color: "crimson" }} className="validatorText">
                 {formik.errors.password}
               </div>

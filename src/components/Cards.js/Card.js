@@ -12,6 +12,7 @@ import adminList from '../multimedia/cardImages/adminList.jpg'
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import { Box, Toolbar } from '@mui/material';
 import Header from '../HomePage/Header';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 function Card() {
 
@@ -99,6 +100,11 @@ function Card() {
       <br />
       <br />
       <br />
+      <div className="signature">
+        Created with&nbsp;
+        <FavoriteIcon style={{ color: "crimson", fontSize: "medium" }} />
+        &nbsp;by&nbsp;<span className="sdn">Sudharsan S</span>
+      </div>
     </>
   );
     

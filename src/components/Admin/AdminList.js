@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../HomePage/Header";
 import { useNavigate } from "react-router-dom";
-import { Box, Toolbar, Tooltip } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
 import Swal from "sweetalert2";
 import env from "react-dotenv";
 import axios from "axios";
@@ -43,7 +43,7 @@ function AdminList() {
       Swal.fire({
         icon: "error",
         title: "OOPS! Internal Server Error",
-        text: "Reloading the Web Page",
+        text: "Reload the Web Page",
       });
     }
   };
@@ -140,7 +140,6 @@ function AdminList() {
             </Tooltip> */}
 
             {/* Delete Button  */}
-            <Tooltip title="Edit" arrow>
               <IconButton
                 className="iconBtn__list"
                 onClick={() => {
@@ -157,7 +156,6 @@ function AdminList() {
                   Delete
                 </Button>
               </IconButton>
-            </Tooltip>
           </>
         );
       },

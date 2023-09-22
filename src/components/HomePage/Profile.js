@@ -5,6 +5,7 @@ import './Profile.css';
 import profile_bg from '../../components/multimedia/cardImages/profileBackground.jpg'
 import { Box, Button, Toolbar } from "@mui/material";
 import LockResetIcon from "@mui/icons-material/LockReset";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 function Profile() {
   const navigate = useNavigate();
@@ -58,10 +59,11 @@ function Profile() {
         </div>
       </div>
 
-      <br />
-      <br />
-      <br />
-      <br />
+      <div className="signature">
+        Created with&nbsp;
+        <FavoriteIcon style={{ color: "crimson", fontSize: "medium" }} />
+        &nbsp;by&nbsp;<span className="sdn">Sudharsan S</span>
+      </div>
     </>
   );
 }

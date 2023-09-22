@@ -182,8 +182,8 @@ function CreateAppointment() {
     });
 
 
-  return ( 
-  <>
+  return (
+    <>
       <Header altLetter={name[0]} moduleName=" | Schedule Appointment" />
       <Box component="main" sx={{ p: 0.5 }}>
         <Toolbar />
@@ -212,7 +212,7 @@ function CreateAppointment() {
                   onChange={formik.handleChange}
                   disabled
                 />
-                {formik.errors.patientName ? (
+                {formik.touched.patientName && formik.errors.patientName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.patientName}
                   </div>
@@ -230,7 +230,7 @@ function CreateAppointment() {
                   onChange={formik.handleChange}
                   disabled
                 />
-                {formik.errors.email ? (
+                {formik.touched.email && formik.errors.email ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.email}
                   </div>
@@ -248,7 +248,7 @@ function CreateAppointment() {
                   onChange={formik.handleChange}
                   disabled
                 />
-                {formik.errors.mobile ? (
+                {formik.touched.mobile && formik.errors.mobile ? (
                   <div style={{ color: "crimson" }}>{formik.errors.mobile}</div>
                 ) : null}
 
@@ -278,7 +278,7 @@ function CreateAppointment() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.specializedIn ? (
+                {formik.touched.specializedIn && formik.errors.specializedIn ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.specializedIn}
                   </div>
@@ -310,15 +310,15 @@ function CreateAppointment() {
                     })}
                   </Select>
                 </FormControl>
-                {formik.errors.specializedIn ? (
+                {formik.touched.doctorName && formik.errors.doctorName ? (
                   <div style={{ color: "crimson" }} className="validatorText">
-                    {formik.errors.specializedIn}
+                    {formik.errors.doctorName}
                   </div>
                 ) : null}
 
                 {/* Date Picker  */}
                 <div className="form-group my-3">
-                  <label htmlFor="time">Choose a time:</label>
+                  <label htmlFor="time">Choose a Date:</label>
                   <input
                     type="date"
                     id="date"
@@ -330,7 +330,7 @@ function CreateAppointment() {
                     onChange={formik.handleChange}
                   />
                 </div>
-                {formik.errors.date ? (
+                {formik.touched.date && formik.errors.date ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.date}
                   </div>
@@ -338,7 +338,7 @@ function CreateAppointment() {
 
                 {/* Time Picker  */}
                 <div className="form-group my-3">
-                  <label htmlFor="time">Choose a time:</label>
+                  <label htmlFor="time">Choose a Time:</label>
                   <input
                     type="time"
                     id="time"
@@ -350,7 +350,7 @@ function CreateAppointment() {
                     onChange={formik.handleChange}
                   />
                 </div>
-                {formik.errors.time ? (
+                {formik.touched.time && formik.errors.time ? (
                   <div style={{ color: "crimson" }} className="validatorText">
                     {formik.errors.time}
                   </div>

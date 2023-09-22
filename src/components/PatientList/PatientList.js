@@ -179,7 +179,7 @@ function PatientList() {
             </Tooltip>
 
             {/* Delete Button  */}
-            <Tooltip title="Edit" arrow>
+            <Tooltip title="Delete" arrow>
               <IconButton
                 className="iconBtn__list"
                 onClick={() => {

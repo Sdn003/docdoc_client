@@ -68,7 +68,7 @@
 }
 
 
-@media screen and (max-width:350px){
+@media screen and (max-width:400px){
     .contentWrapper{
         height: 400px;
         width: 200px;
